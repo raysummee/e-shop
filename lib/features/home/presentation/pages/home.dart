@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:eshop/features/authentication/presentation/bloc/authentication/authentication_bloc.dart';
 import 'package:eshop/features/home/data/repository/product_repository.dart';
 import 'package:eshop/features/home/domain/repository/product_repository.dart';
 import 'package:eshop/features/home/presentation/bloc/product/product_cubit.dart';
@@ -41,6 +42,14 @@ class HomeView extends StatelessWidget {
             fontWeight: FontWeight.w700
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: (){
+              context.read<AuthenticationBloc>().add(AuthenticationSignedOut());
+            }, 
+            icon: const Icon(Icons.logout)
+          )
+        ],
       ),
       body: BlocConsumer<ProductCubit, ProductState>(
         listener: (context, state) {
