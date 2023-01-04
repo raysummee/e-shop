@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1012076243372",
+    "project_id": "e-shop-90b53",
+    "storage_bucket": "e-shop-90b53.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012076243372:android:e8547ae547c5accfe63209",
+        "android_client_info": {
+          "package_name": "com.raysummee.eshop.eshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012076243372-71688tgd85c0d2rubt1h2fd5l125a1it.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa8fj_6V9zimOiJk8OT_cCnhuH6wSRFYs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1012076243372-71688tgd85c0d2rubt1h2fd5l125a1it.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
