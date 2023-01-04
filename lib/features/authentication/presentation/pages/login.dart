@@ -46,7 +46,7 @@ class LoginView extends StatelessWidget {
                 child: BlocListener<AuthenticationBloc, AuthenticationState>(
                   listener: (context, state) {
                     if (state is AuthenticationSuccess) {
-                      Navigator.of(context).pushNamedAndRemoveUntil("/home",(Route<dynamic> route) => false);
+                      Navigator.of(context).pushNamedAndRemoveUntil("/",(Route<dynamic> route) => false);
                     }
                   },
                   child: BlocBuilder<SelectLoginSignupCubit, SelectLoginSignupState>(
