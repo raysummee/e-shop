@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:eshop/core/config/remote_config.dart';
 import 'package:eshop/features/authentication/presentation/bloc/authentication/authentication_bloc.dart';
 import 'package:eshop/features/home/data/repository/product_repository.dart';
 import 'package:eshop/features/home/domain/repository/product_repository.dart';
@@ -18,7 +19,10 @@ class HomePage extends StatelessWidget {
     return RepositoryProvider(
       create: (context) => ProductRepositoryImpl(),
       child: BlocProvider(
-        create: (context) => ProductCubit(context.read<ProductRepositoryImpl>())
+        create: (context) => ProductCubit(
+          context.read<ProductRepositoryImpl>(), 
+          context.read<RemoteConfigImpl>()
+        )
           ..getAllProducts(),
         child: const HomeView(),
       ),
@@ -108,7 +112,7 @@ class HomeView extends StatelessWidget {
               childAspectRatio: 0.7
             ), 
             itemBuilder: (context, index) {
-              return HomeItem(product: state.products[index],);
+              return HomeItem(product: state.products[index], isDiscountAvail: state.isDiscountAvail,);
             },
           );
         },

@@ -1,3 +1,4 @@
+import 'package:eshop/core/config/remote_config.dart';
 import 'package:eshop/core/observer/custom_bloc_observer.dart';
 import 'package:eshop/core/routes/routes.dart';
 import 'package:eshop/core/themes/default_theme.dart';
@@ -24,8 +25,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => AuthenticationRepositoryImpl(),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(
+          create: (context) => AuthenticationRepositoryImpl(),
+        ),
+        RepositoryProvider(
+          create: (context) => RemoteConfigImpl()
+            ..initConfig()
+        ),
+      ],
       child: BlocProvider(
         create: (context) => AuthenticationBloc(context.read<AuthenticationRepositoryImpl>())
           ..add(AuthenticationStarted()),

@@ -20,10 +20,12 @@ class ProductError extends ProductState {
 
 class ProductLoaded extends ProductState {
   final List<ProductModel> products;
+  final bool isDiscountAvail;
   const ProductLoaded({
     required this.products,
+    required this.isDiscountAvail
   });
 
   @override
-  List<Object> get props => [products];
+  List<Object> get props => [products, isDiscountAvail];
 }

@@ -2,8 +2,9 @@ import 'package:eshop/features/home/data/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeItem extends StatelessWidget {
-  const HomeItem({super.key, required this.product});
+  const HomeItem({super.key, required this.product, required this.isDiscountAvail});
   final ProductModel product;
+  final bool isDiscountAvail;
 
   @override
   Widget build(BuildContext context) {
@@ -61,29 +62,29 @@ class HomeItem extends StatelessWidget {
               children: [
                 Text(
                   "\$${product.price}",
-                  style: const TextStyle(
-                    decoration: TextDecoration.lineThrough,
+                  style: TextStyle(
+                    decoration: isDiscountAvail? TextDecoration.lineThrough: null,
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
                     fontStyle: FontStyle.italic,
-                    color: Color.fromRGBO(128, 128, 128, 1)
+                    color: const Color.fromRGBO(128, 128, 128, 1)
                   ),
                 ),
                 const SizedBox(
                   width: 5,
                 ),
-                Text(
+                isDiscountAvail? Text(
                   "\$${product.discountedPrice}",
                   style: const TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
                     fontStyle: FontStyle.italic,
                   ),
-                ),
-                const SizedBox(
+                ): const SizedBox(),
+                isDiscountAvail? const SizedBox(
                   width: 5,
-                ),
-                Text(
+                ): const SizedBox(),
+                isDiscountAvail? Text(
                   "${product.discountPercentage}% off",
                   style: const TextStyle(
                     fontSize: 10,
@@ -91,7 +92,7 @@ class HomeItem extends StatelessWidget {
                     fontStyle: FontStyle.italic,
                     color: Color.fromRGBO(21, 249, 17, 1)
                   ),
-                ),
+                ): const SizedBox(),
               ],
             ),
             const SizedBox(
