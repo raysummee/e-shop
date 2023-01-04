@@ -122,6 +122,8 @@ class LoginView extends StatelessWidget {
                                   onPressed: (){
                                     if(isLogin){
                                       context.read<LoginBloc>().add(FormLogin());
+                                    }else{
+                                      context.read<LoginBloc>().add(FormSignup());
                                     }
                                   }, 
                                   child: Text(

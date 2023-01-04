@@ -33,5 +33,5 @@ class NameChanged extends LoginEvent {
 
 class FormLogin extends LoginEvent {}
 
-class FromSignup extends LoginEvent {}
+class FormSignup extends LoginEvent {}
 

@@ -24,6 +24,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<PasswordChanged>(_onPasswordChanged);
     on<NameChanged>(_onNameChanged);
     on<FormLogin>(_onFormLogin);
+    on<FormSignup>(_onFormSignup);
   }
 
   final RegExp _emailRegExp = RegExp(
@@ -89,6 +90,41 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         await Future.delayed(const Duration(milliseconds: 300));
         UserCredential? authUser = await _authenticationRepository.login(user);
+        emit(LoginSuccess());
+      } on FirebaseAuthException catch (e) {
+        emit(stateVal.copyWith(isLoading: false, error: e.message));
+      }
+    } else {
+      emit(stateVal.copyWith(isLoading: false, isLoginValidateFailed: true));
+    }
+  }
+
+  _onFormSignup(FormSignup event, Emitter<LoginState> emit) async {
+    if(state is! LoginValidate){
+      return;
+    }
+    LoginValidate stateVal = state as LoginValidate;
+
+    emit(stateVal.copyWith(isLoading: true, error: "", isLoginValidateFailed: false));
+
+    bool isLoginValid = stateVal.password.length>6 &&
+      _isEmailValid(stateVal.email)&&
+      stateVal.name.length>3;
+      
+    UserModel user = UserModel(
+      email: stateVal.email,
+      password: stateVal.password,
+      name: stateVal.name);
+
+    if (isLoginValid) {
+      try {
+        await Future.delayed(const Duration(milliseconds: 300));
+        UserCredential? authUser = await _authenticationRepository.signUp(user);
+        await _authenticationRepository.saveUserData(UserModel(
+          uid: authUser?.user?.uid,
+          name: user.name,
+          email: user.email,
+        ));
         emit(LoginSuccess());
       } on FirebaseAuthException catch (e) {
         emit(stateVal.copyWith(isLoading: false, error: e.message));
