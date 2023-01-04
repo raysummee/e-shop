@@ -11,7 +11,11 @@ class ProductCubit extends Cubit<ProductState> {
 
   getAllProducts() async {
     emit(ProductLoading());
-    var products = await _repository.getAllProducts();
-    emit(ProductLoaded(products: products));
+    try{
+      var products = await _repository.getAllProducts();
+      emit(ProductLoaded(products: products));
+    } on Exception catch(err){
+      emit(ProductError(err: err));
+    }
   }
 }

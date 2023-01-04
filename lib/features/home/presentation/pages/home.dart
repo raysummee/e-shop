@@ -42,8 +42,45 @@ class HomeView extends StatelessWidget {
           ),
         ),
       ),
-      body: BlocBuilder<ProductCubit, ProductState>(
+      body: BlocConsumer<ProductCubit, ProductState>(
+        listener: (context, state) {
+          if(state is ProductError){
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.err.toString()))
+            );
+          }
+        },
         builder: (context, state) {
+          if(state is ProductError){
+            return SizedBox(
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: (){
+                      context.read<ProductCubit>().getAllProducts();
+                    }, 
+                    iconSize: 34,
+                    icon: const Icon(Icons.replay),
+                  ),
+                  const Text(
+                    "Reload"
+                  ),
+                  const SizedBox(
+                    height: 2,
+                  ),
+                  const Text(
+                    "Sorry!! Unable to load the products",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: Color.fromRGBO(128, 128, 128, 1)
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
           if(state is! ProductLoaded){
             return const Center(
               child: CircularProgressIndicator(),
