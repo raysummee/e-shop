@@ -37,8 +37,10 @@ class LoginView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(//expanded can be used with this scroll
+          physics: const ClampingScrollPhysics(),
           slivers: [
             SliverFillRemaining(
+              hasScrollBody: false,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 19),
                 child: BlocListener<AuthenticationBloc, AuthenticationState>(
