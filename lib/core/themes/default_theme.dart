@@ -9,10 +9,12 @@ class DefaultTheme{
 
     return baseTheme.copyWith(
       textTheme: GoogleFonts.poppinsTextTheme(baseTheme.textTheme),
-      primaryColor: const Color.fromRGBO(12, 84, 190, 1),
+      colorScheme: baseTheme.colorScheme.copyWith(
+        primary:  const Color.fromRGBO(12, 84, 190, 1),
+        secondary: const Color.fromRGBO(48, 63, 96, 1),
+      ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color.fromRGBO(12, 84, 190, 1),
           minimumSize: const Size(231, 49)
         )
       ),
@@ -22,9 +24,9 @@ class DefaultTheme{
             fontWeight: FontWeight.w700,
             fontSize: 16
           ),
-          foregroundColor:  const Color.fromRGBO(12, 84, 190, 1),
         )
       ),
+      scaffoldBackgroundColor: const Color.fromRGBO(245, 249, 253, 1),
       inputDecorationTheme: InputDecorationTheme(
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color:Colors.transparent),

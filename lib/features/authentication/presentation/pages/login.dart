@@ -35,7 +35,6 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:const Color.fromRGBO(245, 249, 253, 1),
       body: SafeArea(
         child: CustomScrollView(//expanded can be used with this scroll
           slivers: [
