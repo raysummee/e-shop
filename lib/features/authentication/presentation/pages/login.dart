@@ -108,6 +108,7 @@ class LoginView extends StatelessWidget {
                               ),
                               LoginTextField(
                                 hint: "Password",
+                                obsecure: true,
                                 onChanged: (password) {
                                   context.read<LoginBloc>().add(PasswordChanged(password));
                                 },

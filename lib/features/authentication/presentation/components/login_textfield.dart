@@ -6,10 +6,12 @@ class LoginTextField extends StatelessWidget {
     required this.hint,
     this.onChanged,
     this.error,
+    this.obsecure=false
   }) : super(key: key);
   final String hint;
   final Function(String)? onChanged;
   final String? error;
+  final bool obsecure;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class LoginTextField extends StatelessWidget {
           fontSize: 14,
           fontWeight: FontWeight.w400
         ),
+        obscureText: obsecure,
         decoration: InputDecoration(
           hintText: hint,
           filled: true,
