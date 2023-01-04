@@ -1,9 +1,9 @@
+import 'package:eshop/features/home/data/models/product_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class HomeItem extends StatelessWidget {
-  const HomeItem({super.key});
+  const HomeItem({super.key, required this.product});
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,8 @@ class HomeItem extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
-                  "https://assetscdn1.paytm.com/images/catalog/view_item/874378/1629279441968.jpg",
+                  product.thumbnail,
+                  width: double.infinity,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -32,9 +33,11 @@ class HomeItem extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            const Text(
-              "iPhone 9",
-              style: TextStyle(
+            Text(
+              product.title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w700
               ),
@@ -42,10 +45,10 @@ class HomeItem extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            const Text(
-              "An apple mobile which is nothing like apple dasfkjds;fjds;fa  fdsfj",
+            Text(
+              product.desc,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400
               ),
@@ -57,8 +60,8 @@ class HomeItem extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "\$549",
-                  style: TextStyle(
+                  "\$${product.price}",
+                  style: const TextStyle(
                     decoration: TextDecoration.lineThrough,
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
@@ -70,8 +73,8 @@ class HomeItem extends StatelessWidget {
                   width: 5,
                 ),
                 Text(
-                  "\$499",
-                  style: TextStyle(
+                  "\$${product.discountedPrice}",
+                  style: const TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
                     fontStyle: FontStyle.italic,
@@ -81,8 +84,8 @@ class HomeItem extends StatelessWidget {
                   width: 5,
                 ),
                 Text(
-                  "12.96% off",
-                  style: TextStyle(
+                  "${product.discountPercentage}% off",
+                  style: const TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
                     fontStyle: FontStyle.italic,
