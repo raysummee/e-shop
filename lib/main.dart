@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
     return RepositoryProvider(
       create: (context) => AuthenticationRepositoryImpl(),
       child: BlocProvider(
-        create: (context) => AuthenticationBloc(context.read<AuthenticationRepositoryImpl>()),
+        create: (context) => AuthenticationBloc(context.read<AuthenticationRepositoryImpl>())
+          ..add(AuthenticationStarted()),
         child: MaterialApp(
           title: 'E-Shop',
           theme: DefaultTheme.buildTheme(Brightness.light),//added bightness params for future dark mode
